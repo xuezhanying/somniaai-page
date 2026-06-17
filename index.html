@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SomniaAI - Sleep Soundscape & AI Bedtime Stories</title>
+  <meta name="description" content="SomniaAI combines calming soundscapes, breathing guidance, and AI-generated bedtime stories for nightly relaxation.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050814;
+      --panel: rgba(255,255,255,.055);
+      --text: #eef8f5;
+      --muted: rgba(238,248,245,.68);
+      --soft: rgba(238,248,245,.44);
+      --green: #4ecca3;
+      --cyan: #00f2fe;
+      --line: rgba(255,255,255,.10);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(78,204,163,.14), transparent 38%),
+        linear-gradient(180deg, #050814 0%, #0f0c1b 64%, #071b22 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header, main, footer { width: min(1040px, calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 28px 0 18px; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+    nav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; }
+    .brand { font-weight: 800; letter-spacing: .2px; }
+    .hero { padding: 72px 0 54px; }
+    .hero h1 { margin: 0; font-size: clamp(42px, 8vw, 84px); line-height: .98; letter-spacing: 0; }
+    .hero p { max-width: 690px; color: var(--muted); font-size: clamp(18px, 2.4vw, 22px); margin: 22px 0 0; }
+    .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+    }
+    .primary {
+      color: #041016;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      border: 0;
+    }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0 50px; }
+    .card {
+      min-height: 168px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+    .card h2, .card h3 { margin: 0 0 10px; font-size: 20px; }
+    .card p, .card li { color: var(--muted); margin: 0; }
+    .section { padding: 32px 0; border-top: 1px solid var(--line); }
+    .section h2 { margin: 0 0 12px; font-size: 28px; }
+    .section p { color: var(--muted); max-width: 820px; }
+    .localized { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    footer { color: var(--soft); font-size: 13px; padding: 38px 0 42px; border-top: 1px solid var(--line); }
+    @media (max-width: 820px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .hero { padding-top: 42px; }
+      .grid, .localized { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">SomniaAI</div>
+    <nav aria-label="Site navigation">
+      <a href="./privacy.html">Privacy Policy</a>
+      <a href="./support.html">Support</a>
+      <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple Standard EULA</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Sleep soundscapes for quieter nights.</h1>
+      <p>SomniaAI blends gentle ambient audio, 4-7-8 breathing guidance, and AI-generated bedtime stories to help you unwind without pressure.</p>
+      <div class="actions">
+        <a class="button primary" href="./support.html">Get Support</a>
+        <a class="button" href="./privacy.html">View Privacy Policy</a>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Core features">
+      <article class="card">
+        <h2>Spatial Sound Mixer</h2>
+        <p>Layer calming rain, premium sound textures, and optional brainwave tones into a personal bedtime soundscape.</p>
+      </article>
+      <article class="card">
+        <h2>AI Night Sanctuary</h2>
+        <p>Write what weighed on you today and receive a softer, personalized bedtime story with gentle system TTS narration.</p>
+      </article>
+      <article class="card">
+        <h2>Breathing Light</h2>
+        <p>A low-stimulation breathing orb follows a slow 4-7-8 rhythm for visual grounding before sleep.</p>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2>Subscription information</h2>
+      <p>SomniaAI Premium is offered through Apple auto-renewable subscriptions. The app displays the subscription title, duration, localized price, Privacy Policy link, and Terms of Use link before purchase.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Premium Monthly</h3>
+          <p>Product ID: <strong>com.somniaai.premium.monthly</strong><br>Duration: 1 month<br>Reference price: CNY ¥18 / local App Store equivalent</p>
+        </article>
+        <article class="card">
+          <h3>Terms of Use</h3>
+          <p>This app uses Apple’s Standard End User License Agreement unless a custom EULA is added in App Store Connect.</p>
+        </article>
+        <article class="card">
+          <h3>Manage Subscription</h3>
+          <p>Users can manage or cancel the auto-renewable subscription through their Apple ID subscription settings.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section localized">
+      <article>
+        <h2>简体中文</h2>
+        <p>SomniaAI 是一款睡前放松应用，提供空间音频混音、4-7-8 呼吸引导和 AI 个性化睡前故事。</p>
+      </article>
+      <article>
+        <h2>繁體中文</h2>
+        <p>SomniaAI 是一款睡前放鬆 App，提供空間音訊混音、4-7-8 呼吸引導和 AI 個人化睡前故事。</p>
+      </article>
+      <article>
+        <h2>English</h2>
+        <p>SomniaAI is designed for everyday relaxation and bedtime entertainment. It is not medical advice, diagnosis, or therapy.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 SomniaAI. Developer: xuezhanying. SomniaAI is for daily relaxation and entertainment only and does not provide medical advice.</p>
+    <p>Required links: <a href="./privacy.html">Privacy Policy</a> · <a href="./support.html">Support</a> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple Standard EULA</a></p>
+  </footer>
+</body>
+</html>
