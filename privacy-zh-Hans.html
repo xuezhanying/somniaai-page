@@ -14,9 +14,16 @@
     a { color:var(--green); text-decoration:none; } a:hover { text-decoration:underline; }
     h1 { font-size:clamp(34px,6vw,58px); line-height:1; margin:46px 0 14px; }
     h2 { margin-top:34px; font-size:22px; }
+    h3 { margin-top:22px; font-size:17px; color:var(--text); }
     p, li { color:var(--muted); }
     .notice { padding:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px; }
+    .summary { padding:20px; background:var(--panel); border:1px solid var(--line); border-radius:16px; margin:24px 0; }
+    .summary h2 { margin-top:0; }
     footer { color:rgba(238,248,245,.48); font-size:13px; padding:36px 0 42px; margin-top:42px; border-top:1px solid var(--line); }
+    table { width:100%; border-collapse:collapse; margin:12px 0; }
+    th, td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--line); font-size:14px; }
+    th { color:var(--text); font-weight:600; }
+    td { color:var(--muted); }
   </style>
 </head>
 <body>
@@ -27,43 +34,162 @@
 
   <main>
     <h1>隐私政策</h1>
-    <p class="notice">生效日期：2026 年 6 月 17 日。助眠树洞 / Somniary AI 是一款用于日常放松和睡前娱乐的应用。本政策说明应用会处理哪些信息，以及我们如何保护这些信息。</p>
+    <p class="notice">生效日期:2026 年 6 月 22 日 · 最后更新:2026 年 6 月 22 日<br>助眠树洞 / Somniary AI("我们")运营 Somniary AI iOS 应用("本应用")。本隐私政策说明本应用处理哪些信息、如何使用这些信息,以及你享有的权利。使用本应用即表示你同意本政策所述做法。</p>
 
-    <h2>1. 我们处理的信息</h2>
+    <div class="summary">
+      <h2>核心摘要</h2>
+      <ul>
+        <li><strong>我们不收集:</strong>姓名、邮箱、电话、位置、通讯录、照片、健康数据或任何账户信息。本应用无登录系统。</li>
+        <li><strong>我们会处理:</strong>你在 AI 树洞中输入的文本(发送给 AI 服务商生成故事)、本地随机生成的设备 ID(仅用于每日免费故事次数限制)、语言偏好、Apple StoreKit 订阅状态。</li>
+        <li><strong>我们不出售</strong>任何数据给任何人,也<strong>不</strong>将数据用于广告。</li>
+        <li><strong>AI 服务商:</strong>DeepSeek(杭州深度求索人工智能基础研究有限公司,中国大陆)。你的故事请求实时处理,我们不留存输入内容。</li>
+        <li><strong>你的权利:</strong>可随时请求删除、访问或导出你的数据——见第 8 节。</li>
+      </ul>
+    </div>
+
+    <h2>1. 数据控制者</h2>
+    <p>助眠树洞由个人开发者(GitHub 用户名:<strong>xuezhanying</strong>)发布。就你所在地区的数据保护法律而言,该开发者作为数据控制者。如需行使本政策下的任何权利,请通过<a href="./support.html">技术支持页面</a>联系我们。</p>
+
+    <h2>2. 我们处理的信息</h2>
+    <table>
+      <tr><th>数据类别</th><th>示例</th><th>来源</th><th>用途</th></tr>
+      <tr><td>用户输入文本</td><td>"雨夜的小木屋"</td><td>你主动输入</td><td>生成 AI 睡前故事</td></tr>
+      <tr><td>本地设备 ID</td><td>随机 UUID,如 <code>A1B2C3...</code></td><td>设备本地自动生成</td><td>限制每日免费故事次数(免费用户 3 次/天)</td></tr>
+      <tr><td>语言偏好</td><td>English / 繁體中文</td><td>你选择</td><td>本地化应用界面与 AI 故事语言</td></tr>
+      <tr><td>订阅状态</td><td>月付 / 年付 / 终身 / 无</td><td>Apple StoreKit</td><td>解锁 Premium 功能</td></tr>
+      <tr><td>AI 生成的故事</td><td>DeepSeek 返回的故事文本</td><td>AI 服务商</td><td>在应用内显示,可选 TTS 朗读</td></tr>
+    </table>
+    <p><strong>我们不收集或不处理:</strong>姓名、邮箱、电话、精确位置、通讯录、照片、相机输入、麦克风音频、生物识别数据、浏览历史、设备硬件标识符(IDFA/IDFV),以及来自 HealthKit 或任何健康传感器的健康/医疗数据。</p>
+
+    <h2>3. 信息用途</h2>
     <ul>
-      <li><strong>你输入的文本：</strong>当你在 AI 深夜树洞中输入内容时，应用可能处理这些文本，用于生成睡前故事。</li>
-      <li><strong>语音与朗读：</strong>如果你使用语音功能，音频仅应被用于实时语音处理，默认不应保留原始音频。</li>
-      <li><strong>订阅状态：</strong>购买由 Apple StoreKit 处理。应用只读取用于解锁 Premium 功能的订阅权益状态。</li>
-      <li><strong>本地偏好：</strong>语言选择、音频设置和应用偏好可能存储在你的设备本地。</li>
+      <li>根据你的文本输入生成 AI 睡前故事。</li>
+      <li>按设备限制每日免费故事次数。</li>
+      <li>在 Apple StoreKit 有效购买后解锁 Premium 功能。</li>
+      <li>按你选择的语言显示应用界面。</li>
+      <li>对生成的故事提供文本转语音朗读(由 iOS 系统语音引擎在设备本地处理)。</li>
     </ul>
 
-    <h2>2. 信息用途</h2>
-    <p>信息用于提供睡眠声音混音、AI 睡前故事、系统语音朗读、订阅权限、语言设置和应用支持。</p>
+    <h2>4. AI 故事生成与第三方处理者</h2>
+    <h3>4.1 AI 故事生成的工作流程</h3>
+    <p>当你在 AI 树洞中点击"生成故事"按钮时:</p>
+    <ol>
+      <li>应用通过 HTTPS 将你的输入文本、语言偏好、Premium 状态和一个本地随机设备 ID 发送至我们部署在 <strong>Cloudflare Workers</strong>(Cloudflare, Inc.,美国 / 全球边缘节点)的代理服务器。</li>
+      <li>代理服务器注入我们的 API key,将请求转发至 <strong>DeepSeek</strong>(杭州深度求索人工智能基础研究有限公司,服务器位于中国大陆)。</li>
+      <li>DeepSeek 生成故事,通过我们的代理以流式方式实时返回到你的设备。</li>
+      <li>生成的故事显示在应用内,如果你点击"播放语音",可由 iOS 系统文本转语音引擎朗读。</li>
+    </ol>
 
-    <h2>3. AI 与文本转语音</h2>
-    <p>助眠树洞可能根据你主动输入的内容生成放松型睡前内容。文本转语音功能使用系统语音能力。请避免输入高度敏感的个人信息。</p>
+    <h3>4.2 发送给 DeepSeek 的内容</h3>
+    <p>每次故事请求会转发至 DeepSeek 的数据:</p>
+    <ul>
+      <li>你输入的文本(你的故事主题/情绪输入)。</li>
+      <li>目标语言(如 English、繁體中文)。</li>
+      <li>指示 DeepSeek 生成助眠故事的系统提示词。</li>
+    </ul>
+    <p><strong>不发送给 DeepSeek 的内容:</strong>你的设备 ID、订阅状态、IP 地址(Cloudflare 在转发前已隐藏你的来源 IP)或其他任何个人信息。</p>
 
-    <h2>4. 数据共享</h2>
-    <p>助眠树洞不会将你的睡眠习惯、倾诉文本、情绪标签或订阅信息出售给广告网络。Apple 会根据其条款和隐私政策处理购买与订阅。</p>
+    <h3>4.3 第三方服务商清单</h3>
+    <table>
+      <tr><th>服务商</th><th>服务</th><th>共享数据</th><th>所在地</th><th>隐私政策</th></tr>
+      <tr><td>Apple Inc.</td><td>StoreKit 2(应用内购买)</td><td>收据验证、订阅权益</td><td>美国 / 各区域</td><td><a href="https://www.apple.com/legal/privacy/en-ww/">apple.com/legal/privacy</a></td></tr>
+      <tr><td>Cloudflare, Inc.</td><td>Workers(代理服务器)</td><td>请求元数据(IP、时间戳)、转发的文本</td><td>全球边缘</td><td><a href="https://www.cloudflare.com/privacypolicy/">cloudflare.com/privacypolicy</a></td></tr>
+      <tr><td>杭州深度求索</td><td>DeepSeek API(故事生成)</td><td>输入文本、语言、系统提示词</td><td>中国大陆</td><td><a href="https://www.deepseek.com/en/privacy">deepseek.com/privacy</a></td></tr>
+    </table>
 
-    <h2>5. 数据保留</h2>
-    <p>当前应用偏好和生成内容可能按功能需要存储在设备本地。原始音频不应在语音处理后继续保存。如果未来接入云端 AI 服务，数据保留将遵循提供功能所需的最短期限。</p>
+    <h2>5. 跨境数据传输</h2>
+    <p>因本应用面向香港、澳门、台湾、澳大利亚、加拿大和美国用户,且我们的 AI 服务商(DeepSeek)在中国大陆处理数据,你的故事输入会跨境传输至你所在地区之外进行处理。使用 AI 树洞功能即视为你同意此跨境传输。</p>
+    <ul>
+      <li><strong>从港澳台至中国大陆:</strong>DeepSeek 在中国大陆处理数据。依据香港 PDPO、澳门 PDPA 及台湾《个人资料保护法》,我们以你的同意作为此次传输的法律基础。</li>
+      <li><strong>从美国至中国:</strong>美国无全面联邦限制,你同意该传输。</li>
+      <li><strong>从加拿大至中国:</strong>PIPEDA 允许在告知并取得同意后跨境传输,本政策即为此告知。</li>
+      <li><strong>从澳大利亚至中国:</strong>澳大利亚隐私原则(APP 8)要求采取合理步骤确保境外接收方按 APP 处理数据;我们依赖 DeepSeek 公布的隐私承诺以及我们的"最小化数据"做法(不发送任何个人标识符)。</li>
+    </ul>
 
-    <h2>6. 儿童隐私</h2>
-    <p>助眠树洞不面向 13 岁以下儿童。如果你认为儿童向我们提供了个人信息，请通过技术支持页面联系开发者。</p>
+    <h2>6. 数据保留</h2>
+    <ul>
+      <li><strong>你的输入文本:</strong>不存储于我们的代理服务器。转发至 DeepSeek 后即丢弃。DeepSeek 可能按其自身保留政策保留输入(详见 DeepSeek 隐私政策)。</li>
+      <li><strong>生成的故事:</strong>仅存于你设备的内存中,离开该页面即清除,不上传任何地方。</li>
+      <li><strong>设备 ID(限流计数):</strong>存储于 Cloudflare KV,最长 25 小时后自动删除。设备 ID 本身是本地生成的随机 UUID,与你本人无关。</li>
+      <li><strong>订阅状态:</strong>由 Apple 持有。我们在应用启动时检查权益,不维护自己的账户数据库。</li>
+      <li><strong>语言偏好:</strong>通过 <code>UserDefaults</code> 存储在设备本地,卸载应用即删除。</li>
+    </ul>
 
-    <h2>7. 健康免责声明</h2>
-    <p>助眠树洞不是医疗设备，不提供医疗建议、临床诊断或心理治疗。如果你正在经历严重失眠、抑郁、自伤想法或其他心理危机，请立即联系专业医疗人员或当地紧急服务。</p>
+    <h2>7. 数据共享</h2>
+    <p>我们不出售、出租或交易你的数据。我们不与广告网络、数据经纪商或分析追踪方共享数据。接收数据的仅是第 4.3 节列出的三家服务商,且仅传输功能所需的最小数据。</p>
 
-    <h2>8. 你的选择</h2>
-    <p>你可以停止使用 AI 输入功能，调整语言偏好，通过 Apple ID 管理订阅，或删除应用以移除设备本地保存的应用数据。</p>
+    <h2>8. 你的隐私权利</h2>
+    <p>根据你所在的地区,你对个人数据享有特定权利:</p>
 
-    <h2>9. 联系方式</h2>
-    <p>如有隐私问题，请访问 <a href="./support.html">技术支持页面</a>。开发者 GitHub 用户名：<strong>xuezhanying</strong>。</p>
+    <h3>8.1 所有用户(通用)</h3>
+    <ul>
+      <li>知情权:了解我们处理哪些数据(本政策即满足此项)。</li>
+      <li>删除权:请求删除我们持有的与你相关的任何数据。</li>
+      <li>随时停止使用 AI 功能(不使用即可)。</li>
+      <li>卸载应用即可删除所有本地存储数据。</li>
+    </ul>
+
+    <h3>8.2 美国 — CCPA / CPRA(加州居民)</h3>
+    <ul>
+      <li>知情权:了解我们收集的个人信息及共享对象。</li>
+      <li>删除权:请求删除你的个人信息。</li>
+      <li>选择不出售或共享权——<strong>我们不出售或共享个人信息</strong>,因此无需选择退出。</li>
+      <li>不因行使权利而受歧视的权利。</li>
+      <li>行使权利请通过技术支持页面联系我们。</li>
+    </ul>
+
+    <h3>8.3 加拿大 — PIPEDA</h3>
+    <ul>
+      <li>访问和更正我们持有的个人信息的权利。</li>
+      <li>撤回处理同意的权利(停止使用该功能即可)。</li>
+      <li>向加拿大隐私专员办公室(opc.gc.ca)投诉的权利。</li>
+    </ul>
+
+    <h3>8.4 澳大利亚 — 1988 年隐私法 / APPs</h3>
+    <ul>
+      <li>访问和更正个人信息的权利。</li>
+      <li>向澳大利亚信息专员办公室(oaic.gov.au)投诉的权利。</li>
+      <li>匿名权——本应用无账户系统,仅使用随机本地 ID。</li>
+    </ul>
+
+    <h3>8.5 香港 — PDPO</h3>
+    <ul>
+      <li>请求访问和更正你的个人数据的权利。</li>
+      <li>选择退出直接营销的权利(我们不进行任何营销)。</li>
+      <li>向香港个人资料隐私专员公署(pcpd.org.hk)投诉的权利。</li>
+    </ul>
+
+    <h3>8.6 澳门 — 个人资料保护法(第 8/2005 号法律)</h3>
+    <ul>
+      <li>知情、访问、更正和反对的权利。</li>
+      <li>向澳门个人资料保护办公室(gpdp.gov.mo)投诉的权利。</li>
+    </ul>
+
+    <h3>8.7 台湾 — 个人资料保护法</h3>
+    <ul>
+      <li>请求访问、复制、更正或删除你的个人资料的权利。</li>
+      <li>撤回处理同意的权利。</li>
+    </ul>
+
+    <h2>9. 儿童隐私</h2>
+    <p>本应用不面向 13 岁以下儿童(或你所在地区的等效最低年龄)。我们不会故意收集儿童的个人信息。如果你认为儿童通过 AI 树洞提供了个人信息,请通过技术支持页面联系我们,我们将删除相关数据。</p>
+
+    <h2>10. 健康免责声明</h2>
+    <p>助眠树洞是一款放松与娱乐应用,不是医疗设备,不提供医疗建议、临床诊断、心理治疗或睡眠医学服务。如果你正在经历心理健康危机、严重失眠、抑郁、焦虑或自伤想法,请立即联系专业医疗人员或当地紧急服务。</p>
+
+    <h2>11. 安全措施</h2>
+    <p>所有传输中的数据均通过 HTTPS/TLS 1.3 加密。我们的代理服务器(Cloudflare Workers)不会将你的输入文本写入持久存储。唯一的持久存储是 Cloudflare KV 中的限流计数器,仅包含随机设备 ID 和一个数字——不含任何个人信息。我们的 DeepSeek API key 作为 Cloudflare secret 存储,永远不会暴露给应用或终端用户。</p>
+
+    <h2>12. 政策变更</h2>
+    <p>我们可能不时更新本隐私政策。更新时,我们会修订本页顶部的"生效日期"和"最后更新"。对于重大变更(如新增数据类别、新增第三方处理者),我们还将在下次启动应用时显示应用内通知。</p>
+
+    <h2>13. 联系方式</h2>
+    <p>如有任何隐私问题、数据访问请求、删除请求或投诉,请通过<a href="./support.html">助眠树洞技术支持页面</a>联系我们。我们将在 30 天内回复。</p>
+    <p>开发者 GitHub 用户名:<strong>xuezhanying</strong>。</p>
   </main>
 
   <footer>
-    <p>© 2026 Somniary AI / 助眠树洞。必要链接：<a href="./privacy-zh-Hans.html">隐私政策</a> · <a href="./support.html">技术支持</a> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple 标准 EULA</a></p>
+    <p>© 2026 Somniary AI / 助眠树洞。必要链接:<a href="./privacy-zh-Hans.html">隐私政策</a> · <a href="./support.html">技术支持</a> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple 标准 EULA</a></p>
   </footer>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SomniaAI Privacy Policy</title>
-  <meta name="description" content="Privacy Policy for SomniaAI.">
+  <title>Somniary AI Privacy Policy</title>
+  <meta name="description" content="Privacy Policy for Somniary AI.">
   <style>
     :root { color-scheme: dark; --bg:#050814; --panel:rgba(255,255,255,.055); --text:#eef8f5; --muted:rgba(238,248,245,.72); --green:#4ecca3; --line:rgba(255,255,255,.10); }
     * { box-sizing: border-box; }
@@ -14,62 +14,188 @@
     a { color:var(--green); text-decoration:none; } a:hover { text-decoration:underline; }
     h1 { font-size:clamp(34px,6vw,58px); line-height:1; margin:46px 0 14px; }
     h2 { margin-top:34px; font-size:22px; }
+    h3 { margin-top:22px; font-size:17px; color:var(--text); }
     p, li { color:var(--muted); }
     .notice { padding:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px; }
+    .summary { padding:20px; background:var(--panel); border:1px solid var(--line); border-radius:16px; margin:24px 0; }
+    .summary h2 { margin-top:0; }
     footer { color:rgba(238,248,245,.48); font-size:13px; padding:36px 0 42px; margin-top:42px; border-top:1px solid var(--line); }
+    table { width:100%; border-collapse:collapse; margin:12px 0; }
+    th, td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--line); font-size:14px; }
+    th { color:var(--text); font-weight:600; }
+    td { color:var(--muted); }
   </style>
 </head>
 <body>
   <header>
-    <strong>SomniaAI Privacy Policy</strong>
-    <nav><a href="./">Home</a> · <a href="./support.html">Support</a> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple Standard EULA</a></nav>
+    <strong>Somniary AI Privacy Policy</strong>
+    <nav><a href="./">Home</a> · <a href="./support.html">Support</a> · <a href="./privacy-zh-Hans.html">简体中文</a> · <a href="./privacy-zh-Hant.html">繁體中文</a> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple Standard EULA</a></nav>
   </header>
 
   <main>
     <h1>Privacy Policy</h1>
-    <p class="notice">Effective date: June 17, 2026. SomniaAI is designed for everyday relaxation and bedtime entertainment. This policy explains what information is processed and how it is protected.</p>
+    <p class="notice">Effective date: June 22, 2026 · Last updated: June 22, 2026<br>Somniary AI ("we", "us", "our") operates the Somniary AI iOS application ("the App"). This Privacy Policy explains what information the App processes, how it is used, and the rights you have over it. By using the App, you agree to the practices described here.</p>
 
-    <h2>1. Information we process</h2>
+    <div class="summary">
+      <h2>At a Glance</h2>
+      <ul>
+        <li><strong>We do NOT collect:</strong> names, emails, phone numbers, location, contacts, photos, health data, or any account information. The App has no login system.</li>
+        <li><strong>We DO process:</strong> text you type into the AI Night Sanctuary (sent to our AI provider for story generation), a random local device ID (used only for daily free-story limits), language preference, and Apple StoreKit subscription status.</li>
+        <li><strong>We do NOT sell</strong> any data to anyone, and we do NOT use data for advertising.</li>
+        <li><strong>AI provider:</strong> DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd., mainland China). Your story request is processed in real time and not stored by us.</li>
+        <li><strong>Your rights:</strong> You can request deletion, access, or export of your data at any time — see Section 8.</li>
+      </ul>
+    </div>
+
+    <h2>1. Data Controller</h2>
+    <p>Somniary AI is published by an individual developer (GitHub username: <strong>xuezhanying</strong>). For the purposes of data protection laws in your region, the developer acts as the data controller. To exercise any right under this policy, contact us via the <a href="./support.html">Support page</a>.</p>
+
+    <h2>2. Information We Process</h2>
+    <table>
+      <tr><th>Data Category</th><th>Example</th><th>Source</th><th>Purpose</th></tr>
+      <tr><td>User input text</td><td>"Rainy night cabin"</td><td>You type it</td><td>Generate AI bedtime story</td></tr>
+      <tr><td>Local device ID</td><td>Random UUID, e.g. <code>A1B2C3...</code></td><td>Auto-generated on device</td><td>Enforce daily free-story limit (3/day for free users)</td></tr>
+      <tr><td>Language preference</td><td>English / 繁體中文</td><td>You select it</td><td>Localize App UI and AI story language</td></tr>
+      <tr><td>Subscription status</td><td>Monthly / Yearly / Lifetime / None</td><td>Apple StoreKit</td><td>Unlock Premium features</td></tr>
+      <tr><td>AI-generated story</td><td>Story text returned by DeepSeek</td><td>AI provider</td><td>Display in App, optional TTS playback</td></tr>
+    </table>
+    <p><strong>What we do NOT collect or process:</strong> We do not collect names, email addresses, phone numbers, precise location, contacts, photos, camera input, microphone audio, biometric data, browsing history, device hardware identifiers (IDFA/IDFV), or health/medical data from HealthKit or any health sensor.</p>
+
+    <h2>3. How Information Is Used</h2>
     <ul>
-      <li><strong>Text you enter:</strong> SomniaAI may process text you type into the AI Night Sanctuary to generate a bedtime story.</li>
-      <li><strong>Voice and speech:</strong> If voice features are used, audio is intended only for real-time speech processing and should not be retained as raw audio.</li>
-      <li><strong>Subscription status:</strong> Purchases are handled by Apple StoreKit. We receive only the subscription entitlement status needed to unlock Premium features.</li>
-      <li><strong>Local preferences:</strong> Language selection and app settings may be stored locally on your device.</li>
+      <li>To generate AI bedtime stories based on your text input.</li>
+      <li>To enforce daily free-story limits per device.</li>
+      <li>To unlock Premium features after a valid Apple StoreKit purchase.</li>
+      <li>To display the App interface in your chosen language.</li>
+      <li>To provide text-to-speech playback of generated stories (processed locally on device by iOS system speech engine).</li>
     </ul>
 
-    <h2>2. How information is used</h2>
-    <p>Information is used to provide sleep sound mixing, AI-generated bedtime stories, text-to-speech playback, subscription access, language settings, and app support.</p>
+    <h2>4. AI Story Generation & Third-Party Processors</h2>
+    <h3>4.1 How AI story generation works</h3>
+    <p>When you tap "Generate Story" in the AI Night Sanctuary:</p>
+    <ol>
+      <li>The App sends your input text, language preference, premium status, and a local random device ID via HTTPS to our proxy server hosted on <strong>Cloudflare Workers</strong> (Cloudflare, Inc., USA / global edge network).</li>
+      <li>The proxy server injects our API key and forwards the request to <strong>DeepSeek</strong> (operated by Hangzhou DeepSeek Artificial Intelligence Co., Ltd., with servers located in mainland China).</li>
+      <li>DeepSeek generates the story and streams it back through our proxy to your device in real time.</li>
+      <li>The generated story is displayed in the App and may be read aloud by the iOS system text-to-speech engine if you tap "Play".</li>
+    </ol>
 
-    <h2>3. AI and text-to-speech</h2>
-    <p>SomniaAI may use AI features to generate relaxing bedtime content based on user input. Text-to-speech uses system speech capabilities when available. Users should avoid entering highly sensitive personal information.</p>
+    <h3>4.2 What is sent to DeepSeek</h3>
+    <p>The following data is forwarded to DeepSeek for each story request:</p>
+    <ul>
+      <li>The text you typed (your story theme/mood input).</li>
+      <li>The target language (e.g., English, Traditional Chinese).</li>
+      <li>The system prompt instructing DeepSeek to write a calming bedtime story.</li>
+    </ul>
+    <p><strong>NOT sent to DeepSeek:</strong> your device ID, subscription status, IP address (Cloudflare masks your origin IP before forwarding), or any other personal information.</p>
 
-    <h2>4. Data sharing</h2>
-    <p>SomniaAI does not sell sleep habits, journal text, emotion labels, or subscription information to advertising networks. Apple processes purchases under Apple’s own terms and privacy policies.</p>
+    <h3>4.3 Third-party service providers</h3>
+    <table>
+      <tr><th>Provider</th><th>Service</th><th>Data shared</th><th>Location</th><th>Privacy policy</th></tr>
+      <tr><td>Apple Inc.</td><td>StoreKit 2 (in-app purchases)</td><td>Receipt validation, subscription entitlement</td><td>USA / regional</td><td><a href="https://www.apple.com/legal/privacy/en-ww/">apple.com/legal/privacy</a></td></tr>
+      <tr><td>Cloudflare, Inc.</td><td>Workers (proxy server)</td><td>Request metadata (IP, timestamp), forwarded text</td><td>Global edge</td><td><a href="https://www.cloudflare.com/privacypolicy/">cloudflare.com/privacypolicy</a></td></tr>
+      <tr><td>Hangzhou DeepSeek AI Co., Ltd.</td><td>DeepSeek API (story generation)</td><td>Input text, language, system prompt</td><td>Mainland China</td><td><a href="https://www.deepseek.com/en/privacy">deepseek.com/privacy</a></td></tr>
+    </table>
 
-    <h2>5. Data retention</h2>
-    <p>Current app preferences and generated content may be stored locally as needed for the app experience. Raw audio should not be stored after speech processing. If cloud AI services are added, data retention will follow the minimum necessary period for providing the feature.</p>
+    <h2>5. Cross-Border Data Transfers</h2>
+    <p>Because the App is offered to users in Hong Kong, Macau, Taiwan, Australia, Canada, and the United States, and because our AI provider (DeepSeek) processes data in mainland China, your story input is transferred outside your home region for processing. By using the AI Night Sanctuary feature, you consent to this cross-border transfer.</p>
+    <ul>
+      <li><strong>From HK/Macau/TW → China:</strong> DeepSeek processes data in mainland China. Under PDPO (HK), PDPA (Macau), and the Taiwan Personal Data Protection Act, we rely on your consent as the legal basis for this transfer.</li>
+      <li><strong>From US → China:</strong> There is no comprehensive federal restriction; you consent to the transfer.</li>
+      <li><strong>From Canada → China:</strong> PIPEDA permits cross-border transfer with notice and consent, which this policy provides.</li>
+      <li><strong>From Australia → China:</strong> The Australian Privacy Principles (APP 8) require reasonable steps to ensure overseas recipients handle data in line with APPs; we rely on DeepSeek's published privacy commitments and our minimal-data approach (no personal identifiers sent).</li>
+    </ul>
 
-    <h2>6. Children’s privacy</h2>
-    <p>SomniaAI is not intended for children under 13. If you believe a child has provided personal information, please contact support.</p>
+    <h2>6. Data Retention</h2>
+    <ul>
+      <li><strong>Your input text:</strong> Not stored on our proxy server. It is forwarded to DeepSeek and discarded after the story is generated. DeepSeek may retain the input according to its own retention policy (see DeepSeek's privacy policy).</li>
+      <li><strong>Generated story:</strong> Stored only in your device's memory and dismissed when you leave the screen. Not uploaded anywhere.</li>
+      <li><strong>Device ID (rate-limit counter):</strong> Stored in Cloudflare KV for up to 25 hours, then automatically deleted. The device ID itself is a random UUID generated locally; it is not linked to you.</li>
+      <li><strong>Subscription status:</strong> Held by Apple. We check entitlement on app launch; we do not maintain our own account database.</li>
+      <li><strong>Language preference:</strong> Stored locally on your device via <code>UserDefaults</code>. Deleting the App erases it.</li>
+    </ul>
 
-    <h2>7. Health disclaimer</h2>
-    <p>SomniaAI is not a medical device and does not provide medical advice, clinical diagnosis, or psychological treatment. If you are experiencing a mental health crisis, severe insomnia, depression, or self-harm thoughts, please contact licensed professionals or local emergency services immediately.</p>
+    <h2>7. Data Sharing</h2>
+    <p>We do NOT sell, rent, or trade your data. We do NOT share data with advertising networks, data brokers, or analytics trackers. The only parties who receive any data are the three providers listed in Section 4.3, and only the minimum needed to deliver the feature.</p>
 
-    <h2>8. Your choices</h2>
-    <p>You can stop using AI input features, change language preferences, manage subscriptions through your Apple ID, or delete the app to remove locally stored app data from your device.</p>
+    <h2>8. Your Privacy Rights</h2>
+    <p>Depending on where you live, you have specific rights regarding your personal data:</p>
 
-    <h2>9. Contact</h2>
-    <p>For privacy questions, visit <a href="./support.html">SomniaAI Support</a>. Developer GitHub username: <strong>xuezhanying</strong>.</p>
+    <h3>8.1 All users (general)</h3>
+    <ul>
+      <li>Right to know what data we process (this policy fulfills that).</li>
+      <li>Right to request deletion of any data we hold about you.</li>
+      <li>Right to stop using the AI feature at any time (just don't use it).</li>
+      <li>Right to delete all locally-stored data by uninstalling the App.</li>
+    </ul>
+
+    <h3>8.2 United States — CCPA / CPRA (California residents)</h3>
+    <ul>
+      <li>Right to know what personal information we collect and who we share it with.</li>
+      <li>Right to request deletion of your personal information.</li>
+      <li>Right to opt out of sale or sharing — <strong>we do not sell or share personal information</strong>, so no opt-out is needed.</li>
+      <li>Right to non-discrimination for exercising your rights.</li>
+      <li>To exercise these rights, contact us via the Support page.</li>
+    </ul>
+
+    <h3>8.3 Canada — PIPEDA</h3>
+    <ul>
+      <li>Right to access and correct personal information we hold.</li>
+      <li>Right to withdraw consent for processing (stop using the feature).</li>
+      <li>Right to file a complaint with the Office of the Privacy Commissioner of Canada (opc.gc.ca).</li>
+    </ul>
+
+    <h3>8.4 Australia — Privacy Act 1988 / APPs</h3>
+    <ul>
+      <li>Right to access and correct personal information.</li>
+      <li>Right to complain to the Office of the Australian Information Commissioner (oaic.gov.au).</li>
+      <li>Right to remain anonymous — the App has no account system and uses a random local ID only.</li>
+    </ul>
+
+    <h3>8.5 Hong Kong — PDPO</h3>
+    <ul>
+      <li>Right to request access to and correction of your personal data.</li>
+      <li>Right to opt out of direct marketing (we do no marketing).</li>
+      <li>Right to complain to the Privacy Commissioner for Personal Data (pcpd.org.hk).</li>
+    </ul>
+
+    <h3>8.6 Macau — Personal Data Protection Act (Law 8/2005)</h3>
+    <ul>
+      <li>Right to information, access, rectification, and objection.</li>
+      <li>Right to complain to the Office for Personal Data Protection (gpdp.gov.mo).</li>
+    </ul>
+
+    <h3>8.7 Taiwan — Personal Data Protection Act</h3>
+    <ul>
+      <li>Right to request access, copies, correction, or deletion of your personal data.</li>
+      <li>Right to withdraw consent for processing.</li>
+    </ul>
+
+    <h2>9. Children's Privacy</h2>
+    <p>The App is not directed at children under 13 (or the equivalent minimum age in your region: 14 in South Korea, 16 in the EU/UK — not applicable here as we do not target those regions). We do not knowingly collect personal information from children. If you believe a child has provided personal information through the AI Night Sanctuary, please contact us via the Support page and we will delete the relevant data.</p>
+
+    <h2>10. Health Disclaimer</h2>
+    <p>Somniary AI is a relaxation and entertainment App. It is NOT a medical device and does not provide medical advice, clinical diagnosis, psychological treatment, or sleep medicine services. If you are experiencing a mental health crisis, severe insomnia, depression, anxiety, or self-harm thoughts, please contact licensed healthcare professionals or local emergency services immediately.</p>
+
+    <h2>11. Security</h2>
+    <p>All data in transit is encrypted via HTTPS/TLS 1.3. Our proxy server (Cloudflare Workers) does not write your input text to persistent storage. The only persistent storage is the rate-limit counter in Cloudflare KV, which contains only a random device ID and a count — no personal information. Our DeepSeek API key is stored as a Cloudflare secret and is never exposed to the App or end users.</p>
+
+    <h2>12. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Effective date" and "Last updated" at the top of this page. For material changes (e.g., new data categories, new third-party processors), we will also display an in-app notice on next launch.</p>
+
+    <h2>13. Contact</h2>
+    <p>For any privacy question, data access request, deletion request, or complaint, contact us via the <a href="./support.html">Somniary AI Support page</a>. We aim to respond within 30 days.</p>
+    <p>Developer GitHub username: <strong>xuezhanying</strong>.</p>
 
     <h2>简体中文摘要</h2>
-    <p>SomniaAI 重视你的隐私。应用可能处理你主动输入的文本、本地语言设置和 Apple StoreKit 订阅状态。SomniaAI 不出售你的睡眠习惯、倾诉内容或情绪标签。SomniaAI 仅用于日常放松和娱乐，不提供医疗建议、诊断或治疗。</p>
+    <p>Somniary AI 重视你的隐私。应用处理你主动输入的文本、本地随机生成的设备 ID、语言偏好和 Apple StoreKit 订阅状态。AI 故事生成通过 Cloudflare 代理服务器转发至 DeepSeek(中国大陆)处理,我们不存储你的输入文本,生成完成后不留存。我们不出售任何数据,不用于广告。你可随时通过技术支持页联系删除请求。完整英文版以本页英文为准。</p>
 
     <h2>繁體中文摘要</h2>
-    <p>SomniaAI 重視你的隱私。App 可能處理你主動輸入的文字、本地語言設定和 Apple StoreKit 訂閱狀態。SomniaAI 不出售你的睡眠習慣、傾訴內容或情緒標籤。SomniaAI 僅用於日常放鬆和娛樂，不提供醫療建議、診斷或治療。</p>
+    <p>Somniary AI 重視你的隱私。應用處理你主動輸入的文字、本地隨機生成的裝置 ID、語言偏好和 Apple StoreKit 訂閱狀態。AI 故事生成透過 Cloudflare 代理伺服器轉發至 DeepSeek(中國大陸)處理,我們不儲存你的輸入文字,生成完成後不留存。我們不出售任何資料,不用於廣告。你可隨時透過技術支援頁聯絡刪除請求。完整英文版以本頁英文為準。</p>
   </main>
 
   <footer>
-    <p>© 2026 SomniaAI. Required links: <a href="./privacy.html">Privacy Policy</a> · <a href="./support.html">Support</a> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple Standard EULA</a></p>
+    <p>© 2026 Somniary AI. Required links: <a href="./privacy.html">Privacy Policy</a> · <a href="./support.html">Support</a> · <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noopener">Apple Standard EULA</a></p>
   </footer>
 </body>
 </html>
