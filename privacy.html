@@ -40,7 +40,7 @@
       <h2>At a Glance</h2>
       <ul>
         <li><strong>We do NOT collect:</strong> names, emails, phone numbers, location, contacts, photos, health data, or any account information. The App has no login system.</li>
-        <li><strong>We DO process:</strong> text you type into the AI Night Sanctuary (sent to our AI provider for story generation), a random local device ID (used only for daily free-story limits), language preference, and Apple StoreKit subscription status.</li>
+        <li><strong>We DO process:</strong> text you type into the AI Night Sanctuary, a random local device ID, a short-lived one-way hash of the source IP address for abuse prevention, language preference, and Apple StoreKit subscription status.</li>
         <li><strong>We do NOT sell</strong> any data to anyone, and we do NOT use data for advertising.</li>
         <li><strong>AI provider:</strong> DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd., mainland China). Your story request is processed in real time and not stored by us.</li>
         <li><strong>Your rights:</strong> You can request deletion, access, or export of your data at any time — see Section 8.</li>
@@ -55,6 +55,7 @@
       <tr><th>Data Category</th><th>Example</th><th>Source</th><th>Purpose</th></tr>
       <tr><td>User input text</td><td>"Rainy night cabin"</td><td>You type it</td><td>Generate AI bedtime story</td></tr>
       <tr><td>Local device ID</td><td>Random UUID, e.g. <code>A1B2C3...</code></td><td>Auto-generated on device</td><td>Enforce daily free-story limit (3/day for free users)</td></tr>
+      <tr><td>Hashed source IP</td><td>One-way SHA-256 hash</td><td>Network request</td><td>Prevent automated abuse and excessive AI API costs</td></tr>
       <tr><td>Language preference</td><td>English / 繁體中文</td><td>You select it</td><td>Localize App UI and AI story language</td></tr>
       <tr><td>Subscription status</td><td>Monthly / Yearly / Lifetime / None</td><td>Apple StoreKit</td><td>Unlock Premium features</td></tr>
       <tr><td>AI-generated story</td><td>Story text returned by DeepSeek</td><td>AI provider</td><td>Display in App, optional TTS playback</td></tr>
@@ -110,7 +111,7 @@
     <ul>
       <li><strong>Your input text:</strong> Not stored on our proxy server. It is forwarded to DeepSeek and discarded after the story is generated. DeepSeek may retain the input according to its own retention policy (see DeepSeek's privacy policy).</li>
       <li><strong>Generated story:</strong> Stored only in your device's memory and dismissed when you leave the screen. Not uploaded anywhere.</li>
-      <li><strong>Device ID (rate-limit counter):</strong> Stored in Cloudflare KV for up to 25 hours, then automatically deleted. The device ID itself is a random UUID generated locally; it is not linked to you.</li>
+      <li><strong>Rate-limit identifiers:</strong> SHA-256 hashes of the random device ID and source IP address, together with counters, are stored in Cloudflare KV for up to 25 hours and then automatically deleted. We do not store the raw IP address in KV.</li>
       <li><strong>Subscription status:</strong> Held by Apple. We check entitlement on app launch; we do not maintain our own account database.</li>
       <li><strong>Language preference:</strong> Stored locally on your device via <code>UserDefaults</code>. Deleting the App erases it.</li>
     </ul>
@@ -178,7 +179,7 @@
     <p>Somniary AI is a relaxation and entertainment App. It is NOT a medical device and does not provide medical advice, clinical diagnosis, psychological treatment, or sleep medicine services. If you are experiencing a mental health crisis, severe insomnia, depression, anxiety, or self-harm thoughts, please contact licensed healthcare professionals or local emergency services immediately.</p>
 
     <h2>11. Security</h2>
-    <p>All data in transit is encrypted via HTTPS/TLS 1.3. Our proxy server (Cloudflare Workers) does not write your input text to persistent storage. The only persistent storage is the rate-limit counter in Cloudflare KV, which contains only a random device ID and a count — no personal information. Our DeepSeek API key is stored as a Cloudflare secret and is never exposed to the App or end users.</p>
+    <p>All data in transit is encrypted via HTTPS. Our proxy server does not write your input text to persistent storage. Cloudflare KV contains only short-lived SHA-256 hashes of the random device ID and source IP, plus counters. Our DeepSeek API key is stored as a Cloudflare secret and is never exposed to the App or end users.</p>
 
     <h2>12. Changes to This Policy</h2>
     <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Effective date" and "Last updated" at the top of this page. For material changes (e.g., new data categories, new third-party processors), we will also display an in-app notice on next launch.</p>

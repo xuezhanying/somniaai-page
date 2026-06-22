@@ -40,7 +40,7 @@
       <h2>核心摘要</h2>
       <ul>
         <li><strong>我们不收集:</strong>姓名、邮箱、电话、位置、通讯录、照片、健康数据或任何账户信息。本应用无登录系统。</li>
-        <li><strong>我们会处理:</strong>你在 AI 树洞中输入的文本(发送给 AI 服务商生成故事)、本地随机生成的设备 ID(仅用于每日免费故事次数限制)、语言偏好、Apple StoreKit 订阅状态。</li>
+        <li><strong>我们会处理:</strong>你在 AI 树洞中输入的文本、本地随机设备 ID、用于防止滥用的短期来源 IP 单向哈希、语言偏好和 Apple StoreKit 订阅状态。</li>
         <li><strong>我们不出售</strong>任何数据给任何人,也<strong>不</strong>将数据用于广告。</li>
         <li><strong>AI 服务商:</strong>DeepSeek(杭州深度求索人工智能基础研究有限公司,中国大陆)。你的故事请求实时处理,我们不留存输入内容。</li>
         <li><strong>你的权利:</strong>可随时请求删除、访问或导出你的数据——见第 8 节。</li>
@@ -55,6 +55,7 @@
       <tr><th>数据类别</th><th>示例</th><th>来源</th><th>用途</th></tr>
       <tr><td>用户输入文本</td><td>"雨夜的小木屋"</td><td>你主动输入</td><td>生成 AI 睡前故事</td></tr>
       <tr><td>本地设备 ID</td><td>随机 UUID,如 <code>A1B2C3...</code></td><td>设备本地自动生成</td><td>限制每日免费故事次数(免费用户 3 次/天)</td></tr>
+      <tr><td>来源 IP 哈希</td><td>SHA-256 单向哈希</td><td>网络请求</td><td>防止自动化滥用和异常 AI API 费用</td></tr>
       <tr><td>语言偏好</td><td>English / 繁體中文</td><td>你选择</td><td>本地化应用界面与 AI 故事语言</td></tr>
       <tr><td>订阅状态</td><td>月付 / 年付 / 终身 / 无</td><td>Apple StoreKit</td><td>解锁 Premium 功能</td></tr>
       <tr><td>AI 生成的故事</td><td>DeepSeek 返回的故事文本</td><td>AI 服务商</td><td>在应用内显示,可选 TTS 朗读</td></tr>
@@ -110,7 +111,7 @@
     <ul>
       <li><strong>你的输入文本:</strong>不存储于我们的代理服务器。转发至 DeepSeek 后即丢弃。DeepSeek 可能按其自身保留政策保留输入(详见 DeepSeek 隐私政策)。</li>
       <li><strong>生成的故事:</strong>仅存于你设备的内存中,离开该页面即清除,不上传任何地方。</li>
-      <li><strong>设备 ID(限流计数):</strong>存储于 Cloudflare KV,最长 25 小时后自动删除。设备 ID 本身是本地生成的随机 UUID,与你本人无关。</li>
+      <li><strong>限流标识:</strong>随机设备 ID 和来源 IP 的 SHA-256 哈希及计数会存储于 Cloudflare KV,最长 25 小时后自动删除。KV 中不存储原始 IP 地址。</li>
       <li><strong>订阅状态:</strong>由 Apple 持有。我们在应用启动时检查权益,不维护自己的账户数据库。</li>
       <li><strong>语言偏好:</strong>通过 <code>UserDefaults</code> 存储在设备本地,卸载应用即删除。</li>
     </ul>
@@ -178,7 +179,7 @@
     <p>助眠树洞是一款放松与娱乐应用,不是医疗设备,不提供医疗建议、临床诊断、心理治疗或睡眠医学服务。如果你正在经历心理健康危机、严重失眠、抑郁、焦虑或自伤想法,请立即联系专业医疗人员或当地紧急服务。</p>
 
     <h2>11. 安全措施</h2>
-    <p>所有传输中的数据均通过 HTTPS/TLS 1.3 加密。我们的代理服务器(Cloudflare Workers)不会将你的输入文本写入持久存储。唯一的持久存储是 Cloudflare KV 中的限流计数器,仅包含随机设备 ID 和一个数字——不含任何个人信息。我们的 DeepSeek API key 作为 Cloudflare secret 存储,永远不会暴露给应用或终端用户。</p>
+    <p>所有传输中的数据均通过 HTTPS 加密。代理服务器不会将你的输入文本写入持久存储。Cloudflare KV 仅包含随机设备 ID 和来源 IP 的短期 SHA-256 哈希及计数。DeepSeek API key 作为 Cloudflare secret 存储,不会暴露给应用或终端用户。</p>
 
     <h2>12. 政策变更</h2>
     <p>我们可能不时更新本隐私政策。更新时,我们会修订本页顶部的"生效日期"和"最后更新"。对于重大变更(如新增数据类别、新增第三方处理者),我们还将在下次启动应用时显示应用内通知。</p>
