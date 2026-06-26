@@ -40,7 +40,7 @@
       <h2>At a Glance</h2>
       <ul>
         <li><strong>We do NOT collect:</strong> names, emails, phone numbers, location, contacts, photos, health data, or any account information. The App has no login system.</li>
-        <li><strong>We DO process:</strong> text you type into the AI Night Sanctuary, a random local device ID, a short-lived one-way hash of the source IP address for abuse prevention, language preference, and Apple StoreKit subscription status.</li>
+        <li><strong>We DO process:</strong> text you type into the AI Night Sanctuary, a random local device ID, a short-lived one-way hash of the source IP address, language preference, and StoreKit transaction identifiers and signed transaction data used to verify Premium entitlement with Apple.</li>
         <li><strong>We do NOT sell</strong> any data to anyone, and we do NOT use data for advertising.</li>
         <li><strong>AI provider:</strong> DeepSeek (Hangzhou DeepSeek Artificial Intelligence Co., Ltd., mainland China). Your story request is processed in real time and not stored by us.</li>
         <li><strong>Your rights:</strong> You can request deletion, access, or export of your data at any time — see Section 8.</li>
@@ -57,7 +57,7 @@
       <tr><td>Local device ID</td><td>Random UUID, e.g. <code>A1B2C3...</code></td><td>Auto-generated on device</td><td>Enforce daily free-story limit (3/day for free users)</td></tr>
       <tr><td>Hashed source IP</td><td>One-way SHA-256 hash</td><td>Network request</td><td>Prevent automated abuse and excessive AI API costs</td></tr>
       <tr><td>Language preference</td><td>English / 繁體中文</td><td>You select it</td><td>Localize App UI and AI story language</td></tr>
-      <tr><td>Subscription status</td><td>Monthly / Yearly / Lifetime / None</td><td>Apple StoreKit</td><td>Unlock Premium features</td></tr>
+      <tr><td>StoreKit transaction data</td><td>Transaction ID and signed JWS</td><td>Apple StoreKit 2</td><td>Verify Premium entitlement with Apple</td></tr>
       <tr><td>AI-generated story</td><td>Story text returned by DeepSeek</td><td>AI provider</td><td>Display in App, optional TTS playback</td></tr>
     </table>
     <p><strong>What we do NOT collect or process:</strong> We do not collect names, email addresses, phone numbers, precise location, contacts, photos, camera input, microphone audio, biometric data, browsing history, device hardware identifiers (IDFA/IDFV), or health/medical data from HealthKit or any health sensor.</p>
@@ -75,7 +75,8 @@
     <h3>4.1 How AI story generation works</h3>
     <p>When you tap "Generate Story" in the AI Night Sanctuary:</p>
     <ol>
-      <li>The App sends your input text, language preference, premium status, and a local random device ID via HTTPS to our proxy server hosted on <strong>Cloudflare Workers</strong> (Cloudflare, Inc., USA / global edge network).</li>
+      <li>The App sends your input text, language preference, local random device ID and, when available, the current StoreKit transaction ID and signed JWS via HTTPS to our proxy hosted on <strong>Cloudflare Workers</strong>.</li>
+      <li>The proxy sends the transaction ID to Apple's App Store Server API to verify the Bundle ID, Product ID, expiration and revocation status. The client cannot grant itself Premium access.</li>
       <li>The proxy server injects our API key and forwards the request to <strong>DeepSeek</strong> (operated by Hangzhou DeepSeek Artificial Intelligence Co., Ltd., with servers located in mainland China).</li>
       <li>DeepSeek generates the story and streams it back through our proxy to your device in real time.</li>
       <li>The generated story is displayed in the App and may be read aloud by the iOS system text-to-speech engine if you tap "Play".</li>
@@ -93,7 +94,7 @@
     <h3>4.3 Third-party service providers</h3>
     <table>
       <tr><th>Provider</th><th>Service</th><th>Data shared</th><th>Location</th><th>Privacy policy</th></tr>
-      <tr><td>Apple Inc.</td><td>StoreKit 2 (in-app purchases)</td><td>Receipt validation, subscription entitlement</td><td>USA / regional</td><td><a href="https://www.apple.com/legal/privacy/en-ww/">apple.com/legal/privacy</a></td></tr>
+      <tr><td>Apple Inc.</td><td>StoreKit 2 and App Store Server API</td><td>Transaction ID and subscription entitlement lookup</td><td>USA / regional</td><td><a href="https://www.apple.com/legal/privacy/en-ww/">apple.com/legal/privacy</a></td></tr>
       <tr><td>Cloudflare, Inc.</td><td>Workers (proxy server)</td><td>Request metadata (IP, timestamp), forwarded text</td><td>Global edge</td><td><a href="https://www.cloudflare.com/privacypolicy/">cloudflare.com/privacypolicy</a></td></tr>
       <tr><td>Hangzhou DeepSeek AI Co., Ltd.</td><td>DeepSeek API (story generation)</td><td>Input text, language, system prompt</td><td>Mainland China</td><td><a href="https://www.deepseek.com/en/privacy">deepseek.com/privacy</a></td></tr>
     </table>
@@ -112,7 +113,7 @@
       <li><strong>Your input text:</strong> Not stored on our proxy server. It is forwarded to DeepSeek and discarded after the story is generated. DeepSeek may retain the input according to its own retention policy (see DeepSeek's privacy policy).</li>
       <li><strong>Generated story:</strong> Stored only in your device's memory and dismissed when you leave the screen. Not uploaded anywhere.</li>
       <li><strong>Rate-limit identifiers:</strong> SHA-256 hashes of the random device ID and source IP address, together with counters, are stored in Cloudflare KV for up to 25 hours and then automatically deleted. We do not store the raw IP address in KV.</li>
-      <li><strong>Subscription status:</strong> Held by Apple. We check entitlement on app launch; we do not maintain our own account database.</li>
+      <li><strong>StoreKit transaction data:</strong> The signed transaction is used transiently for verification and is not written to our database. A one-way hash of a successfully verified transaction ID may be cached in Cloudflare KV for up to 10 minutes to reduce repeated Apple requests.</li>
       <li><strong>Language preference:</strong> Stored locally on your device via <code>UserDefaults</code>. Deleting the App erases it.</li>
     </ul>
 
@@ -179,7 +180,7 @@
     <p>Somniary AI is a relaxation and entertainment App. It is NOT a medical device and does not provide medical advice, clinical diagnosis, psychological treatment, or sleep medicine services. If you are experiencing a mental health crisis, severe insomnia, depression, anxiety, or self-harm thoughts, please contact licensed healthcare professionals or local emergency services immediately.</p>
 
     <h2>11. Security</h2>
-    <p>All data in transit is encrypted via HTTPS. Our proxy server does not write your input text to persistent storage. Cloudflare KV contains only short-lived SHA-256 hashes of the random device ID and source IP, plus counters. Our DeepSeek API key is stored as a Cloudflare secret and is never exposed to the App or end users.</p>
+    <p>All data in transit is encrypted via HTTPS. Our proxy server does not write your input text or signed StoreKit transaction to persistent storage. Cloudflare KV contains only short-lived hashes and counters. DeepSeek and Apple private API credentials are stored as Cloudflare secrets and are never exposed to the App or end users.</p>
 
     <h2>12. Changes to This Policy</h2>
     <p>We may update this Privacy Policy from time to time. When we do, we will revise the "Effective date" and "Last updated" at the top of this page. For material changes (e.g., new data categories, new third-party processors), we will also display an in-app notice on next launch.</p>
@@ -189,10 +190,10 @@
     <p>Developer GitHub username: <strong>xuezhanying</strong>.</p>
 
     <h2>简体中文摘要</h2>
-    <p>Somniary AI 重视你的隐私。应用处理你主动输入的文本、本地随机生成的设备 ID、语言偏好和 Apple StoreKit 订阅状态。AI 故事生成通过 Cloudflare 代理服务器转发至 DeepSeek(中国大陆)处理,我们不存储你的输入文本,生成完成后不留存。我们不出售任何数据,不用于广告。你可随时通过技术支持页联系删除请求。完整英文版以本页英文为准。</p>
+    <p>Somniary AI 重视你的隐私。应用处理你主动输入的文本、本地随机设备 ID、语言偏好以及用于向 Apple 校验权益的 StoreKit 交易数据。AI 故事经 Cloudflare 转发至 DeepSeek(中国大陆)处理,我们不持久存储输入文本或签名交易。我们不出售数据,不用于广告。完整英文版以本页英文为准。</p>
 
     <h2>繁體中文摘要</h2>
-    <p>Somniary AI 重視你的隱私。應用處理你主動輸入的文字、本地隨機生成的裝置 ID、語言偏好和 Apple StoreKit 訂閱狀態。AI 故事生成透過 Cloudflare 代理伺服器轉發至 DeepSeek(中國大陸)處理,我們不儲存你的輸入文字,生成完成後不留存。我們不出售任何資料,不用於廣告。你可隨時透過技術支援頁聯絡刪除請求。完整英文版以本頁英文為準。</p>
+    <p>Somniary AI 重視你的隱私。應用處理你主動輸入的文字、本地隨機裝置 ID、語言偏好以及用於向 Apple 驗證權益的 StoreKit 交易資料。AI 故事經 Cloudflare 轉發至 DeepSeek(中國大陸)處理,我們不持久儲存輸入文字或簽章交易。我們不出售資料,不用於廣告。完整英文版以本頁英文為準。</p>
   </main>
 
   <footer>

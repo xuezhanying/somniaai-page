@@ -40,7 +40,7 @@
       <h2>核心摘要</h2>
       <ul>
         <li><strong>我们不收集:</strong>姓名、邮箱、电话、位置、通讯录、照片、健康数据或任何账户信息。本应用无登录系统。</li>
-        <li><strong>我们会处理:</strong>你在 AI 树洞中输入的文本、本地随机设备 ID、用于防止滥用的短期来源 IP 单向哈希、语言偏好和 Apple StoreKit 订阅状态。</li>
+        <li><strong>我们会处理:</strong>你在 AI 树洞中输入的文本、本地随机设备 ID、短期来源 IP 单向哈希、语言偏好，以及用于向 Apple 校验 Premium 权益的 StoreKit 交易 ID 和签名交易数据。</li>
         <li><strong>我们不出售</strong>任何数据给任何人,也<strong>不</strong>将数据用于广告。</li>
         <li><strong>AI 服务商:</strong>DeepSeek(杭州深度求索人工智能基础研究有限公司,中国大陆)。你的故事请求实时处理,我们不留存输入内容。</li>
         <li><strong>你的权利:</strong>可随时请求删除、访问或导出你的数据——见第 8 节。</li>
@@ -57,7 +57,7 @@
       <tr><td>本地设备 ID</td><td>随机 UUID,如 <code>A1B2C3...</code></td><td>设备本地自动生成</td><td>限制每日免费故事次数(免费用户 3 次/天)</td></tr>
       <tr><td>来源 IP 哈希</td><td>SHA-256 单向哈希</td><td>网络请求</td><td>防止自动化滥用和异常 AI API 费用</td></tr>
       <tr><td>语言偏好</td><td>English / 繁體中文</td><td>你选择</td><td>本地化应用界面与 AI 故事语言</td></tr>
-      <tr><td>订阅状态</td><td>月付 / 年付 / 终身 / 无</td><td>Apple StoreKit</td><td>解锁 Premium 功能</td></tr>
+      <tr><td>StoreKit 交易数据</td><td>交易 ID 和签名 JWS</td><td>Apple StoreKit 2</td><td>向 Apple 校验 Premium 权益</td></tr>
       <tr><td>AI 生成的故事</td><td>DeepSeek 返回的故事文本</td><td>AI 服务商</td><td>在应用内显示,可选 TTS 朗读</td></tr>
     </table>
     <p><strong>我们不收集或不处理:</strong>姓名、邮箱、电话、精确位置、通讯录、照片、相机输入、麦克风音频、生物识别数据、浏览历史、设备硬件标识符(IDFA/IDFV),以及来自 HealthKit 或任何健康传感器的健康/医疗数据。</p>
@@ -75,7 +75,8 @@
     <h3>4.1 AI 故事生成的工作流程</h3>
     <p>当你在 AI 树洞中点击"生成故事"按钮时:</p>
     <ol>
-      <li>应用通过 HTTPS 将你的输入文本、语言偏好、Premium 状态和一个本地随机设备 ID 发送至我们部署在 <strong>Cloudflare Workers</strong>(Cloudflare, Inc.,美国 / 全球边缘节点)的代理服务器。</li>
+      <li>应用通过 HTTPS 将输入文本、语言偏好、本地随机设备 ID，以及可用时的 StoreKit 交易 ID 和签名 JWS 发送至 <strong>Cloudflare Workers</strong> 代理服务器。</li>
+      <li>代理服务器将交易 ID 发送至 Apple App Store Server API，校验 Bundle ID、Product ID、到期和撤销状态，客户端无法自行授予 Premium 权益。</li>
       <li>代理服务器注入我们的 API key,将请求转发至 <strong>DeepSeek</strong>(杭州深度求索人工智能基础研究有限公司,服务器位于中国大陆)。</li>
       <li>DeepSeek 生成故事,通过我们的代理以流式方式实时返回到你的设备。</li>
       <li>生成的故事显示在应用内,如果你点击"播放语音",可由 iOS 系统文本转语音引擎朗读。</li>
@@ -93,7 +94,7 @@
     <h3>4.3 第三方服务商清单</h3>
     <table>
       <tr><th>服务商</th><th>服务</th><th>共享数据</th><th>所在地</th><th>隐私政策</th></tr>
-      <tr><td>Apple Inc.</td><td>StoreKit 2(应用内购买)</td><td>收据验证、订阅权益</td><td>美国 / 各区域</td><td><a href="https://www.apple.com/legal/privacy/en-ww/">apple.com/legal/privacy</a></td></tr>
+      <tr><td>Apple Inc.</td><td>StoreKit 2 与 App Store Server API</td><td>交易 ID 和订阅权益查询</td><td>美国 / 各区域</td><td><a href="https://www.apple.com/legal/privacy/en-ww/">apple.com/legal/privacy</a></td></tr>
       <tr><td>Cloudflare, Inc.</td><td>Workers(代理服务器)</td><td>请求元数据(IP、时间戳)、转发的文本</td><td>全球边缘</td><td><a href="https://www.cloudflare.com/privacypolicy/">cloudflare.com/privacypolicy</a></td></tr>
       <tr><td>杭州深度求索</td><td>DeepSeek API(故事生成)</td><td>输入文本、语言、系统提示词</td><td>中国大陆</td><td><a href="https://www.deepseek.com/en/privacy">deepseek.com/privacy</a></td></tr>
     </table>
@@ -112,7 +113,7 @@
       <li><strong>你的输入文本:</strong>不存储于我们的代理服务器。转发至 DeepSeek 后即丢弃。DeepSeek 可能按其自身保留政策保留输入(详见 DeepSeek 隐私政策)。</li>
       <li><strong>生成的故事:</strong>仅存于你设备的内存中,离开该页面即清除,不上传任何地方。</li>
       <li><strong>限流标识:</strong>随机设备 ID 和来源 IP 的 SHA-256 哈希及计数会存储于 Cloudflare KV,最长 25 小时后自动删除。KV 中不存储原始 IP 地址。</li>
-      <li><strong>订阅状态:</strong>由 Apple 持有。我们在应用启动时检查权益,不维护自己的账户数据库。</li>
+      <li><strong>StoreKit 交易数据:</strong>签名交易仅用于实时校验，不写入我们的数据库。验证成功的交易 ID 单向哈希可在 Cloudflare KV 中缓存最长 10 分钟，用于减少重复 Apple 请求。</li>
       <li><strong>语言偏好:</strong>通过 <code>UserDefaults</code> 存储在设备本地,卸载应用即删除。</li>
     </ul>
 
@@ -179,7 +180,7 @@
     <p>助眠树洞是一款放松与娱乐应用,不是医疗设备,不提供医疗建议、临床诊断、心理治疗或睡眠医学服务。如果你正在经历心理健康危机、严重失眠、抑郁、焦虑或自伤想法,请立即联系专业医疗人员或当地紧急服务。</p>
 
     <h2>11. 安全措施</h2>
-    <p>所有传输中的数据均通过 HTTPS 加密。代理服务器不会将你的输入文本写入持久存储。Cloudflare KV 仅包含随机设备 ID 和来源 IP 的短期 SHA-256 哈希及计数。DeepSeek API key 作为 Cloudflare secret 存储,不会暴露给应用或终端用户。</p>
+    <p>所有数据均通过 HTTPS 加密传输。代理服务器不会将输入文本或签名 StoreKit 交易写入持久存储。Cloudflare KV 仅包含短期哈希和计数。DeepSeek 与 Apple 私有 API 凭证均作为 Cloudflare secret 保存，不会暴露给应用或用户。</p>
 
     <h2>12. 政策变更</h2>
     <p>我们可能不时更新本隐私政策。更新时,我们会修订本页顶部的"生效日期"和"最后更新"。对于重大变更(如新增数据类别、新增第三方处理者),我们还将在下次启动应用时显示应用内通知。</p>

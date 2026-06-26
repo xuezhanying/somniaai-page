@@ -40,7 +40,7 @@
       <h2>核心摘要</h2>
       <ul>
         <li><strong>我們不收集:</strong>姓名、電子郵件、電話、位置、通訊錄、照片、健康資料或任何帳戶資訊。本 App 無登入系統。</li>
-        <li><strong>我們會處理:</strong>你在 AI 樹洞中輸入的文字、本地隨機裝置 ID、用於防止濫用的短期來源 IP 單向雜湊、語言偏好和 Apple StoreKit 訂閱狀態。</li>
+        <li><strong>我們會處理:</strong>你在 AI 樹洞中輸入的文字、本地隨機裝置 ID、短期來源 IP 單向雜湊、語言偏好，以及用於向 Apple 驗證 Premium 權益的 StoreKit 交易 ID 與簽章交易資料。</li>
         <li><strong>我們不出售</strong>任何資料給任何人,也<strong>不</strong>將資料用於廣告。</li>
         <li><strong>AI 服務商:</strong>DeepSeek(杭州深度求索人工智能基礎研究有限公司,中國大陸)。你的故事請求即時處理,我們不留存輸入內容。</li>
         <li><strong>你的權利:</strong>可隨時請求刪除、存取或匯出你的資料——見第 8 節。</li>
@@ -57,7 +57,7 @@
       <tr><td>本地裝置 ID</td><td>隨機 UUID,如 <code>A1B2C3...</code></td><td>裝置本地自動生成</td><td>限制每日免費故事次數(免費使用者 3 次/天)</td></tr>
       <tr><td>來源 IP 雜湊</td><td>SHA-256 單向雜湊</td><td>網路請求</td><td>防止自動化濫用與異常 AI API 費用</td></tr>
       <tr><td>語言偏好</td><td>English / 繁體中文</td><td>你選擇</td><td>本地化 App 介面與 AI 故事語言</td></tr>
-      <tr><td>訂閱狀態</td><td>月付 / 年付 / 終身 / 無</td><td>Apple StoreKit</td><td>解鎖 Premium 功能</td></tr>
+      <tr><td>StoreKit 交易資料</td><td>交易 ID 與簽章 JWS</td><td>Apple StoreKit 2</td><td>向 Apple 驗證 Premium 權益</td></tr>
       <tr><td>AI 生成的故事</td><td>DeepSeek 傳回的故事文字</td><td>AI 服務商</td><td>在 App 內顯示,可選 TTS 朗讀</td></tr>
     </table>
     <p><strong>我們不收集或不處理:</strong>姓名、電子郵件、電話、精確位置、通訊錄、照片、相機輸入、麥克風音訊、生物辨識資料、瀏覽歷史、裝置硬體識別碼(IDFA/IDFV),以及來自 HealthKit 或任何健康感測器的健康/醫療資料。</p>
@@ -75,7 +75,8 @@
     <h3>4.1 AI 故事生成的工作流程</h3>
     <p>當你在 AI 樹洞中點擊「生成故事」按鈕時:</p>
     <ol>
-      <li>App 透過 HTTPS 將你的輸入文字、語言偏好、Premium 狀態和一個本地隨機裝置 ID 傳送至我們部署於 <strong>Cloudflare Workers</strong>(Cloudflare, Inc.,美國 / 全球邊緣節點)的代理伺服器。</li>
+      <li>App 透過 HTTPS 將輸入文字、語言偏好、本地隨機裝置 ID，以及可用時的 StoreKit 交易 ID 與簽章 JWS 傳送至 <strong>Cloudflare Workers</strong> 代理伺服器。</li>
+      <li>代理伺服器將交易 ID 傳送至 Apple App Store Server API，驗證 Bundle ID、Product ID、到期與撤銷狀態，客戶端無法自行授予 Premium 權益。</li>
       <li>代理伺服器注入我們的 API key,將請求轉發至 <strong>DeepSeek</strong>(杭州深度求索人工智能基礎研究有限公司,伺服器位於中國大陸)。</li>
       <li>DeepSeek 生成故事,透過我們的代理以串流方式即時傳回到你的裝置。</li>
       <li>生成的故事顯示在 App 內,如果你點擊「播放語音」,可由 iOS 系統文字轉語音引擎朗讀。</li>
@@ -93,7 +94,7 @@
     <h3>4.3 第三方服務商清單</h3>
     <table>
       <tr><th>服務商</th><th>服務</th><th>共享資料</th><th>所在地</th><th>隱私政策</th></tr>
-      <tr><td>Apple Inc.</td><td>StoreKit 2(App 內購買)</td><td>收據驗證、訂閱權益</td><td>美國 / 各區域</td><td><a href="https://www.apple.com/legal/privacy/en-ww/">apple.com/legal/privacy</a></td></tr>
+      <tr><td>Apple Inc.</td><td>StoreKit 2 與 App Store Server API</td><td>交易 ID 與訂閱權益查詢</td><td>美國 / 各區域</td><td><a href="https://www.apple.com/legal/privacy/en-ww/">apple.com/legal/privacy</a></td></tr>
       <tr><td>Cloudflare, Inc.</td><td>Workers(代理伺服器)</td><td>請求中繼資料(IP、時間戳)、轉發的文字</td><td>全球邊緣</td><td><a href="https://www.cloudflare.com/privacypolicy/">cloudflare.com/privacypolicy</a></td></tr>
       <tr><td>杭州深度求索</td><td>DeepSeek API(故事生成)</td><td>輸入文字、語言、系統提示詞</td><td>中國大陸</td><td><a href="https://www.deepseek.com/en/privacy">deepseek.com/privacy</a></td></tr>
     </table>
@@ -112,7 +113,7 @@
       <li><strong>你的輸入文字:</strong>不儲存於我們的代理伺服器。轉發至 DeepSeek 後即丟棄。DeepSeek 可能按其自身保留政策保留輸入(詳見 DeepSeek 隱私政策)。</li>
       <li><strong>生成的故事:</strong>僅存於你裝置的記憶體中,離開該頁面即清除,不上傳任何地方。</li>
       <li><strong>限流識別碼:</strong>隨機裝置 ID 和來源 IP 的 SHA-256 雜湊及計數會儲存於 Cloudflare KV,最長 25 小時後自動刪除。KV 中不儲存原始 IP 位址。</li>
-      <li><strong>訂閱狀態:</strong>由 Apple 持有。我們在 App 啟動時檢查權益,不維護自己的帳戶資料庫。</li>
+      <li><strong>StoreKit 交易資料:</strong>簽章交易僅用於即時驗證，不寫入我們的資料庫。驗證成功的交易 ID 單向雜湊可在 Cloudflare KV 中快取最長 10 分鐘，用於減少重複 Apple 請求。</li>
       <li><strong>語言偏好:</strong>透過 <code>UserDefaults</code> 儲存在裝置本地,解除安裝 App 即刪除。</li>
     </ul>
 
@@ -179,7 +180,7 @@
     <p>助眠樹洞是一款放鬆與娛樂 App,不是醫療設備,不提供醫療建議、臨床診斷、心理治療或睡眠醫學服務。如果你正在經歷心理健康危機、嚴重失眠、憂鬱、焦慮或自傷想法,請立即聯絡專業醫療人員或當地緊急服務。</p>
 
     <h2>11. 安全措施</h2>
-    <p>所有傳輸中的資料均透過 HTTPS 加密。代理伺服器不會將你的輸入文字寫入持久儲存。Cloudflare KV 僅包含隨機裝置 ID 和來源 IP 的短期 SHA-256 雜湊及計數。DeepSeek API key 作為 Cloudflare secret 儲存,不會暴露給 App 或終端使用者。</p>
+    <p>所有資料均透過 HTTPS 加密傳輸。代理伺服器不會將輸入文字或簽章 StoreKit 交易寫入持久儲存。Cloudflare KV 僅包含短期雜湊與計數。DeepSeek 與 Apple 私有 API 憑證均作為 Cloudflare secret 保存，不會暴露給 App 或使用者。</p>
 
     <h2>12. 政策變更</h2>
     <p>我們可能不時更新本隱私政策。更新時,我們會修訂本頁頂部的「生效日期」和「最後更新」。對於重大變更(如新增資料類別、新增第三方處理者),我們還將在下次啟動 App 時顯示 App 內通知。</p>
